@@ -1,0 +1,14 @@
+{
+  "name": "gomoku-engine",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node gomoku-engine.js"
+  },
+  "dependencies": {
+    "amqplib": "",
+    "when": "",
+    "node-uuid": "",
+    "bluebird":""
+  }
+}

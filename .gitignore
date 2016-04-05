@@ -1,0 +1,6 @@
+node_modules
+.idea
+*.iml
+build/*
+five.dat
+*.log
