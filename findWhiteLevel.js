@@ -13,7 +13,7 @@ var useMultiMachine = false;
 var machineCount = 0;
 var type = 0;
 
-for(var whiteLevel = 15; whiteLevel< 30;whiteLevel++) {
+for(var whiteLevel = 17; whiteLevel< 30;whiteLevel++) {
     var startTime = new Date().getTime()
     var result = playGame(whiteLevel);
     var end = new Date().getTime()
