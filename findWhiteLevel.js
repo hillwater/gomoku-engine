@@ -7,13 +7,13 @@ var gomoku = require(addonPath + '/gomoku.node');
 const BLACK=1;
 const WHITE=-1;
 
-var blackLevel = 10;
+var blackLevel = 14;
 var useMultiCore = false;
 var useMultiMachine = false;
 var machineCount = 0;
 var type = 0;
 
-for(var whiteLevel = 12; whiteLevel< 15;whiteLevel++) {
+for(var whiteLevel = 15; whiteLevel< 30;whiteLevel++) {
     var startTime = new Date().getTime()
     var result = playGame(whiteLevel);
     var end = new Date().getTime()
