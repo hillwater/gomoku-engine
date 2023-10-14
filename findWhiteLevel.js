@@ -15,14 +15,14 @@ var type = 0;
 
 for(var whiteLevel = 17; whiteLevel< 30;whiteLevel++) {
     var startTime = new Date().getTime()
-    var result = playGame(whiteLevel);
+    var winColor = playGame(whiteLevel);
     var end = new Date().getTime()
     var cost = (end - startTime)/1000; // seconds
     console.log("cost for whiteLevel:"+whiteLevel+",cost:"+cost+"s")
 
-    if(result !== BLACK) {
+    if(winColor !== BLACK) {
         // drawn or white win
-        console.log("All Done, drawn or white win, "+result+",whiteLevel:"+whiteLevel)
+        console.log("All Done, drawn or white win, "+winColor+",whiteLevel:"+whiteLevel)
         break;
     }
 }
@@ -118,8 +118,6 @@ function playGame(whiteLevel) {
 
     while(true) {
         var level = (color===BLACK)?blackLevel:whiteLevel;
-
-        console.log("level:"+level+",posList:"+posList)
 
         var result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
 
