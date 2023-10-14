@@ -110,8 +110,9 @@ function playGame(whiteLevel) {
 
     // set black to center position
     add(board, BLACK, 7, 7);
+    add(board, WHITE, 6, 6);
 
-    var posList = [COORD_XY(7,7)];
+    var posList = [COORD_XY(7,7),COORD_XY(6,6)];
 
     // set initial color
     var color = Math.pow(-1, posList.length);
