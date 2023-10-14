@@ -22,8 +22,8 @@ Handle<Value> search(const Arguments& args) {
 
 	uint32_t level = args[0]->Uint32Value();
 
-	if (level <= 0 || level > 16) {
-		ThrowException(Exception::TypeError(String::New("Level out of range")));
+	if (level <= 0 || level > 30) {
+		ThrowException(Exception::TypeError(String::New("Level out of range, level should in 1~30")));
 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
 	}
 
