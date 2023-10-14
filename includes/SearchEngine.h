@@ -68,7 +68,7 @@ public:
 	PNSEngine* pnsEngine;
 
 	//for statistic
-	int totalSearchNode;
+	long totalSearchNode;
 
 	// change player
 	__forceinline void ChangeSide()

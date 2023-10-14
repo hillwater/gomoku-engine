@@ -165,10 +165,9 @@ int SearchEngine::SearchMain(int level)
 	int beta = MATE_VALUE;
 	const int expectedWindow = 41;
 	const int MAX_LEVEL = level;
-	int average = 0;
-	int levelNode = 0;
-	int fifthLastLevelNode = 0;
-	int lastLevelNode = 0;
+	long levelNode = 0;
+	long fifthLastLevelNode = 0;
+	long lastLevelNode = 0;
 	for (int i = 1; i <=MAX_LEVEL; i ++) {//LIMIT_DEPTH
 		levelNode = totalSearchNode;
 		int value = SearchFull(alpha, beta, i);
