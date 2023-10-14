@@ -7,13 +7,13 @@ var gomoku = require(addonPath + '/gomoku.node');
 const BLACK=1;
 const WHITE=-1;
 
-var blackLevel = 12;
+var blackLevel = 10;
 var useMultiCore = false;
 var useMultiMachine = false;
 var machineCount = 0;
 var type = 0;
 
-for(var whiteLevel = 5; whiteLevel< 10;whiteLevel++) {
+for(var whiteLevel = 12; whiteLevel< 15;whiteLevel++) {
     var startTime = new Date().getTime()
     var result = playGame(whiteLevel);
     var end = new Date().getTime()
@@ -97,7 +97,7 @@ function checkByStep(board, color,  pos, xdiff,  ydiff) {
             break;
         cnt++;
     }
-    
+
     if (cnt >= 4)
         return true;
     return false;
