@@ -89,7 +89,6 @@ function checkByStep(board, color,  pos, xdiff,  ydiff) {
             break;
         cnt++;
     }
-    console.log("checkByStep: reverse cnt = " + cnt);
 
     for (i = 1;  i < 5; i++){
         tmpx = x + xdiff * i;
@@ -98,7 +97,7 @@ function checkByStep(board, color,  pos, xdiff,  ydiff) {
             break;
         cnt++;
     }
-    console.log("checkByStep: reverse cnt = " + cnt);
+    
     if (cnt >= 4)
         return true;
     return false;
