@@ -15,9 +15,9 @@ var type = 0;
 
 for(var whiteLevel = 5; whiteLevel< 10;whiteLevel++) {
     var startTime = new Date().getTime()
-    let result = playGame(whiteLevel);
-    let end = new Date().getTime()
-    let cost = (end - startTime)/1000; // seconds
+    var result = playGame(whiteLevel);
+    var end = new Date().getTime()
+    var cost = (end - startTime)/1000; // seconds
     console.log("cost for whiteLevel:"+whiteLevel+",cost:"+cost+"s")
 
     if(result !== BLACK) {
@@ -73,13 +73,13 @@ function isSameColor(board, x,y,color) {
 }
 
 function checkByStep(board, color,  pos, xdiff,  ydiff) {
-    let x = RANK_X(pos);
-    let y = RANK_Y(pos);
+    var x = RANK_X(pos);
+    var y = RANK_Y(pos);
 
-    let tmpx=0;
-    let tmpy=0;
-    let i;
-    let cnt = 0;
+    var tmpx=0;
+    var tmpy=0;
+    var i;
+    var cnt = 0;
 
     //向反方向找到颜色相同的点
     for (i = 1;  i < 5; i++){
@@ -107,20 +107,20 @@ function checkByStep(board, color,  pos, xdiff,  ydiff) {
 function playGame(whiteLevel) {
     console.log("start game:"+whiteLevel)
 
-    let board = initBoard();
+    var board = initBoard();
 
     // set black to center position
     add(board, BLACK, 7, 7);
 
-    let posList = [COORD_XY(7,7)];
+    var posList = [COORD_XY(7,7)];
 
     // set initial color
-    let color = Math.pow(-1, posList.length);
+    var color = Math.pow(-1, posList.length);
 
     while(true) {
-        let level = (color===BLACK)?blackLevel:whiteLevel;
+        var level = (color===BLACK)?blackLevel:whiteLevel;
 
-        let result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
+        var result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
 
         posList.push(result);
         add(board, color, RANK_X(result), RANK_Y(result));
