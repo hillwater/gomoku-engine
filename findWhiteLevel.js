@@ -119,6 +119,8 @@ function playGame(whiteLevel) {
     while(true) {
         var level = (color===BLACK)?blackLevel:whiteLevel;
 
+        console.log("level:"+level+",posList:"+posList)
+
         var result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
 
         posList.push(result);
