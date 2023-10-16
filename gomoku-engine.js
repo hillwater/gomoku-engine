@@ -113,7 +113,7 @@ function closeOnErr(err) {
     return false;
   }
   console.error("[AMQP] error", err);
-  amqpConn.close();
+  //amqpConn.close();
   return true;
 }
 
