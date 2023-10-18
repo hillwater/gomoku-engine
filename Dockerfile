@@ -1,4 +1,4 @@
-FROM node:0.10
+FROM node:16.15
 
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/build/Release
