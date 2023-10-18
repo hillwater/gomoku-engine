@@ -50,14 +50,14 @@ var posListArray = [
 ];
 
 // auto play games
-posListArray.forEach(async function(posList){
+for(let i = 0; i<posListArray.length;i++) {
+    let posList = posListArray[i];
     var startTime = new Date().getTime()
     var winColor = await playGame(posList);
     var end = new Date().getTime()
     var cost = (end - startTime)/1000; // seconds
     console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
-})
-
+}
 
 console.log("all finished");
 
@@ -160,9 +160,9 @@ async function playGame(initPosList) {
             result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
             // insert to redis
             dataAccess.insert(posList, level, type, result);
-            console.log("no hit! do search, level:"+level+"posList:"+posList+",type:"+type+",result:"+result);
+            console.log("no hit! do search, level:"+level+",posList:"+posList+",type:"+type+",result:"+result);
         } else {
-            console.log("hit! level:"+level+"posList:"+posList+",type:"+type)
+            console.log("hit! level:"+level+",posList:"+posList+",type:"+type)
         }
 
         posList.push(result);
