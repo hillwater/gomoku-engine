@@ -9,6 +9,13 @@ you can have a play on http://www.hillwater.xyz/gomoku
 
 ## how to run
 
+### version requirement
+- node 16.15.1
+- node-gyp 9.4.0
+- gcc 8.3.1
+- python 3.6.8
+
+
 ````
 export CLOUDAMQP_URL=amqp://localhost
 
