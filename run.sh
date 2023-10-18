@@ -1,9 +1,9 @@
 #!/bin/bash
 
-IMAGE=hillwater/gomoku-engine:1.0.0
+IMAGE=hillwater/gomoku-engine:1.0.1
 
-# should set environment variable CLOUDAMQP_URL to rabbitmq url
+CLOUDAMQP_URL=amqp://hillwater:hillwater@172.17.0.1:5672/gomoku
 
-sudo docker login
+docker login
 
-sudo docker run -e "CLOUDAMQP_URL=$CLOUDAMQP_URL" -d $IMAGE
+docker run -e "CLOUDAMQP_URL=$CLOUDAMQP_URL" -d $IMAGE
