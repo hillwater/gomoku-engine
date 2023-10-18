@@ -58,10 +58,10 @@ runAutoGame().then(() => {
 async function runAutoGame() {
     for(let i = 0; i<posListArray.length;i++) {
         let posList = posListArray[i];
-        var startTime = new Date().getTime()
-        var winColor = await playGame(posList);
-        var end = new Date().getTime()
-        var cost = (end - startTime)/1000; // seconds
+        let startTime = new Date().getTime()
+        let winColor = await playGame(posList);
+        let end = new Date().getTime()
+        let cost = (end - startTime)/1000; // seconds
         console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
     }
 }
@@ -110,13 +110,13 @@ function isSameColor(board, x,y,color) {
 }
 
 function checkByStep(board, color,  pos, xdiff,  ydiff) {
-    var x = RANK_X(pos);
-    var y = RANK_Y(pos);
+    let x = RANK_X(pos);
+    let y = RANK_Y(pos);
 
-    var tmpx=0;
-    var tmpy=0;
-    var i;
-    var cnt = 0;
+    let tmpx=0;
+    let tmpy=0;
+    let i;
+    let cnt = 0;
 
     //向反方向找到颜色相同的点
     for (i = 1;  i < 5; i++){
@@ -143,27 +143,27 @@ function checkByStep(board, color,  pos, xdiff,  ydiff) {
 async function playGame(initPosList) {
     console.log("start game:"+initPosList)
 
-    var board = initBoard();
-    var posList = [];
+    let board = initBoard();
+    let posList = [];
 
-    for(var i = 0; i<initPosList.length;i++) {
-        var pos = initPosList[i];
+    for(let i = 0; i<initPosList.length;i++) {
+        let pos = initPosList[i];
         add(board, (i%2==0)?BLACK:WHITE, RANK_X(pos), RANK_Y(pos));
         posList.push(pos);
     }
 
     // set color
-    var color = Math.pow(-1, posList.length);
+    let color = Math.pow(-1, posList.length);
 
     while(true) {
-        var level = (color===BLACK)?blackLevel:whiteLevel;
+        let level = (color===BLACK)?blackLevel:whiteLevel;
 
-        var result = await dataAccess.find(posList, level, type);
+        let result = await dataAccess.find(posList, level, type);
 
         if(result == null || result == mask) {
             result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
             // insert to redis
-            dataAccess.insert(posList, level, type, result);
+            await dataAccess.insert(posList, level, type, result);
             console.log("no hit! do search, level:"+level+",posList:"+posList+",type:"+type+",result:"+result);
         } else {
             console.log("hit! level:"+level+",posList:"+posList+",type:"+type+",result:"+result)
