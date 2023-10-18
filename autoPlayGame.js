@@ -8,8 +8,8 @@ var dataAccess = require('./dataAccess');
 const BLACK=1;
 const WHITE=-1;
 
-var blackLevel = 12;
-var whiteLevel = 14;
+var blackLevel = 14;
+var whiteLevel = 18;
 var useMultiCore = false;
 var useMultiMachine = false;
 var machineCount = 0;
