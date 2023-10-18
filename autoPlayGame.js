@@ -161,10 +161,11 @@ async function playGame(initPosList) {
         let result = await dataAccess.find(posList, level, type);
 
         if(result == null || result == mask) {
+            console.log("no hit! start do search, level:"+level+",posList:"+posList+",type:"+type);
             result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
             // insert to redis
             await dataAccess.insert(posList, level, type, result);
-            console.log("no hit! do search, level:"+level+",posList:"+posList+",type:"+type+",result:"+result);
+            console.log("finish do search, level:"+level+",posList:"+posList+",type:"+type+",result:"+result);
         } else {
             console.log("hit! level:"+level+",posList:"+posList+",type:"+type+",result:"+result)
         }
