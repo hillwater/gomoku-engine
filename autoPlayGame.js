@@ -8,8 +8,8 @@ var dataAccess = require('./dataAccess');
 const BLACK=1;
 const WHITE=-1;
 
-var blackLevel = 14;
-var whiteLevel = 18;
+var blackLevel = 12;
+var whiteLevel = 14;
 var useMultiCore = false;
 var useMultiMachine = false;
 var machineCount = 0;
@@ -19,7 +19,7 @@ var mask = 0x5a00;
 
 var posListArray = [
     [COORD_XY(7,7),COORD_XY(6,6)],
-    [COORD_XY(7,7),COORD_XY(7,6)],
+    // [COORD_XY(7,7),COORD_XY(7,6)],
     // 26种开局
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
@@ -50,9 +50,9 @@ var posListArray = [
 ];
 
 // auto play games
-posListArray.forEach(function(posList){
+posListArray.forEach(async function(posList){
     var startTime = new Date().getTime()
-    var winColor = playGame(posList);
+    var winColor = await playGame(posList);
     var end = new Date().getTime()
     var cost = (end - startTime)/1000; // seconds
     console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
