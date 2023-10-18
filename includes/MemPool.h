@@ -1,7 +1,7 @@
 ﻿#ifndef _MEM_POOL_
 #define _MEM_POOL_
 
-#include <malloc.h>
+#include <sys/malloc.h>
 #include <assert.h>
 
 template<class T>

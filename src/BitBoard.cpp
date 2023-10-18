@@ -1,7 +1,7 @@
 ﻿#include "../includes/BitBoard.h"
 #include "../includes/DataGenerator.h"
 #include <algorithm>
-#include <malloc.h>
+#include <sys/malloc.h>
 #include <iostream>
 
 using namespace std;

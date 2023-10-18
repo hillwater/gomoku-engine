@@ -1,94 +1,96 @@
-#include <node.h>
-#include <v8.h>
-#include <vector>
-#include "../includes/SearchEngine.h"
+// it's replaced by Node-Addon-API
 
-using namespace v8;
+// #include <node.h>
+// #include <v8.h>
+// #include <vector>
+// #include "../includes/SearchEngine.h"
 
-Handle<Value> search(const Arguments& args) {
-	const int ERROR_RESULT = 0x100;
+// using namespace v8;
 
-	HandleScope scope;
-	if (args.Length() < 6) {
-		ThrowException(Exception::TypeError(String::New("Wrong number of arguments: " + args.Length())));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// Handle<Value> search(const Arguments& args) {
+// 	const int ERROR_RESULT = 0x100;
 
-	// level
-	if (!args[0]->IsUint32()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 	HandleScope scope;
+// 	if (args.Length() < 6) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong number of arguments: " + args.Length())));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	uint32_t level = args[0]->Uint32Value();
+// 	// level
+// 	if (!args[0]->IsUint32()) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	if (level <= 0 || level > 30) {
-		ThrowException(Exception::TypeError(String::New("Level out of range, level should in 1~30")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 	uint32_t level = args[0]->Uint32Value();
 
-	// position list
-	if (!args[1]->IsArray()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 	if (level <= 0 || level > 30) {
+// 		ThrowException(Exception::TypeError(String::New("Level out of range, level should in 1~30")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	std::vector<uint32_t> posList;
+// 	// position list
+// 	if (!args[1]->IsArray()) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	Local<Array> input = Local<Array>::Cast(args[1]);
-	uint32_t num_locations = input->Length();
+// 	std::vector<uint32_t> posList;
 
-	for (unsigned int i = 0; i < num_locations; i++) {
-		Local<Integer> value = Local<Integer>::Cast(input->Get(i));
+// 	Local<Array> input = Local<Array>::Cast(args[1]);
+// 	uint32_t num_locations = input->Length();
 
-		posList.push_back(value->IntegerValue());
-	}
+// 	for (unsigned int i = 0; i < num_locations; i++) {
+// 		Local<Integer> value = Local<Integer>::Cast(input->Get(i));
 
-	// multiple core speed up flag
-	if (!args[2]->IsBoolean()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 		posList.push_back(value->IntegerValue());
+// 	}
 
-	bool useMultiCore = args[2]->BooleanValue();
+// 	// multiple core speed up flag
+// 	if (!args[2]->IsBoolean()) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	// multiple machine speed up flag
-	if (!args[3]->IsBoolean()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 	bool useMultiCore = args[2]->BooleanValue();
 
-	bool useMultiMachine = args[3]->BooleanValue();
+// 	// multiple machine speed up flag
+// 	if (!args[3]->IsBoolean()) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	// how many machines for multiple machine speed up
-	if (!args[4]->IsUint32()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 	bool useMultiMachine = args[3]->BooleanValue();
 
-	uint32_t machineCount = args[4]->Uint32Value();
+// 	// how many machines for multiple machine speed up
+// 	if (!args[4]->IsUint32()) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	// type
-	if (!args[5]->IsUint32()) {
-		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-	}
+// 	uint32_t machineCount = args[4]->Uint32Value();
 
-	uint32_t type = args[5]->Uint32Value();
+// 	// type
+// 	if (!args[5]->IsUint32()) {
+// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
+// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
+// 	}
 
-	SearchEngine* searchEngine = SearchEngine::getInstance();
+// 	uint32_t type = args[5]->Uint32Value();
 
-	uint32_t result = searchEngine->search(level,
-			posList,
-			useMultiCore,
-			useMultiMachine,
-			machineCount,
-			type);
+// 	SearchEngine* searchEngine = SearchEngine::getInstance();
 
-	return scope.Close(Uint32::NewFromUnsigned(result));
-}
+// 	uint32_t result = searchEngine->search(level,
+// 			posList,
+// 			useMultiCore,
+// 			useMultiMachine,
+// 			machineCount,
+// 			type);
 
-void register_module(Handle<Object> target) {
-	NODE_SET_METHOD(target, "search", search);
-}
-NODE_MODULE(gomoku, register_module)
+// 	return scope.Close(Uint32::NewFromUnsigned(result));
+// }
+
+// void register_module(Handle<Object> target) {
+// 	NODE_SET_METHOD(target, "search", search);
+// }
+// NODE_MODULE(gomoku, register_module)

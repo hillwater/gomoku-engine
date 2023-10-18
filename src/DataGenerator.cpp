@@ -1,6 +1,6 @@
 ﻿#include "../includes/DataGenerator.h"
 #include <fstream>
-#include <malloc.h>
+#include <sys/malloc.h>
 #include <string.h>
 
 using namespace std;

@@ -6,10 +6,11 @@
     "start": "node gomoku-engine.js"
   },
   "dependencies": {
-    "redis":"3.1.x",
     "amqplib": "0.8.x",
-    "when": "3.7.x",
+    "bluebird": "3.7.x",
+    "node-addon-api": "^7.0.0",
     "node-uuid": "1.4.x",
-    "bluebird":"3.7.x"
+    "redis": "3.1.x",
+    "when": "3.7.x"
   }
 }
