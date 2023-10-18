@@ -52,6 +52,7 @@ var posListArray = [
 // auto play games
 runAutoGame().then(() => {
     console.log("all finished");
+    process.exit();
 })
 
 async function runAutoGame() {
