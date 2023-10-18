@@ -166,7 +166,7 @@ async function playGame(initPosList) {
             dataAccess.insert(posList, level, type, result);
             console.log("no hit! do search, level:"+level+",posList:"+posList+",type:"+type+",result:"+result);
         } else {
-            console.log("hit! level:"+level+",posList:"+posList+",type:"+type)
+            console.log("hit! level:"+level+",posList:"+posList+",type:"+type+",result:"+result)
         }
 
         posList.push(result);
