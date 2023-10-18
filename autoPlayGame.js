@@ -1,5 +1,5 @@
 var addonPath = './build/Release';
-// var gomoku = require(addonPath + '/gomoku.node');
+var gomoku = require(addonPath + '/gomoku.node');
 var dataAccess = require('./dataAccess');
 
 // 0: empty
