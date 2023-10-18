@@ -1,7 +1,9 @@
 ﻿#include "../includes/BitBoard.h"
 #include "../includes/DataGenerator.h"
 #include <algorithm>
-#include <sys/malloc.h>
+#include <malloc.h>
+// for Mac use
+// #include <sys/malloc.h>
 #include <iostream>
 
 using namespace std;

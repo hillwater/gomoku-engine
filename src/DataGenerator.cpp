@@ -1,6 +1,8 @@
 ﻿#include "../includes/DataGenerator.h"
 #include <fstream>
-#include <sys/malloc.h>
+#include <malloc.h>
+// for Mac use
+// #include <sys/malloc.h>
 #include <string.h>
 
 using namespace std;
