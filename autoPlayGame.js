@@ -1,5 +1,6 @@
 var addonPath = './build/Release';
-var gomoku = require(addonPath + '/gomoku.node');
+// var gomoku = require(addonPath + '/gomoku.node');
+var dataAccess = require('./dataAccess');
 
 // 0: empty
 // 1: black
@@ -7,26 +8,58 @@ var gomoku = require(addonPath + '/gomoku.node');
 const BLACK=1;
 const WHITE=-1;
 
-var blackLevel = 12;
+var blackLevel = 14;
+var whiteLevel = 18;
 var useMultiCore = false;
 var useMultiMachine = false;
 var machineCount = 0;
 var type = 0;
+var mask = 0x5a00;
 
-for(var whiteLevel = 14; whiteLevel< 30;whiteLevel++) {
+
+var posListArray = [
+    [COORD_XY(7,7),COORD_XY(6,6)],
+    [COORD_XY(7,7),COORD_XY(7,6)],
+    // 26种开局
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)]
+];
+
+// auto play games
+posListArray.forEach(function(posList){
     var startTime = new Date().getTime()
-    var winColor = playGame(whiteLevel);
+    var winColor = playGame(posList);
     var end = new Date().getTime()
     var cost = (end - startTime)/1000; // seconds
-    console.log("cost for whiteLevel:"+whiteLevel+",cost:"+cost+"s")
+    console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
+})
 
-    if(winColor !== BLACK) {
-        // drawn or white win
-        console.log("All Done, drawn or white win, "+winColor+",whiteLevel:"+whiteLevel)
-        break;
-    }
-}
-console.log("finished");
+
+console.log("all finished");
 
 
 function initBoard() {
@@ -103,24 +136,34 @@ function checkByStep(board, color,  pos, xdiff,  ydiff) {
     return false;
 }
 
-function playGame(whiteLevel) {
-    console.log("start game:"+whiteLevel)
+async function playGame(initPosList) {
+    console.log("start game:"+initPosList)
 
     var board = initBoard();
+    var posList = [];
 
-    // set black to center position
-    add(board, BLACK, 7, 7);
-    add(board, WHITE, 6, 6);
+    for(var i = 0; i<initPosList.length;i++) {
+        var pos = initPosList[i];
+        add(board, (i%2==0)?BLACK:WHITE, RANK_X(pos), RANK_Y(pos));
+        posList.push(pos);
+    }
 
-    var posList = [COORD_XY(7,7),COORD_XY(6,6)];
-
-    // set initial color
+    // set color
     var color = Math.pow(-1, posList.length);
 
     while(true) {
         var level = (color===BLACK)?blackLevel:whiteLevel;
 
-        var result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
+        var result = await dataAccess.find(posList, level, type);
+
+        if(result == null || result == mask) {
+            result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
+            // insert to redis
+            dataAccess.insert(posList, level, type, result);
+            console.log("no hit! do search, level:"+level+"posList:"+posList+",type:"+type+",result:"+result);
+        } else {
+            console.log("hit! level:"+level+"posList:"+posList+",type:"+type)
+        }
 
         posList.push(result);
         add(board, color, RANK_X(result), RANK_Y(result));

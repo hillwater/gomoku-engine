@@ -6,6 +6,7 @@
     "start": "node gomoku-engine.js"
   },
   "dependencies": {
+    "redis":"3.1.x",
     "amqplib": "0.8.x",
     "when": "3.7.x",
     "node-uuid": "1.4.x",
