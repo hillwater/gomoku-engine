@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=hillwater/gomoku-engine:1.0.0
+IMAGE=hillwater/gomoku-engine:1.0.1
 
 . build.sh
 
