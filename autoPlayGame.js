@@ -19,7 +19,7 @@ var mask = 0x5a00;
 
 var posListArray = [
     [COORD_XY(7,7),COORD_XY(6,6)],
-    // [COORD_XY(7,7),COORD_XY(7,6)],
+    [COORD_XY(7,7),COORD_XY(7,6)],
     // 26种开局
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
@@ -50,17 +50,20 @@ var posListArray = [
 ];
 
 // auto play games
-for(let i = 0; i<posListArray.length;i++) {
-    let posList = posListArray[i];
-    var startTime = new Date().getTime()
-    var winColor = await playGame(posList);
-    var end = new Date().getTime()
-    var cost = (end - startTime)/1000; // seconds
-    console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
+runAutoGame().then(() => {
+    console.log("all finished");
+})
+
+async function runAutoGame() {
+    for(let i = 0; i<posListArray.length;i++) {
+        let posList = posListArray[i];
+        var startTime = new Date().getTime()
+        var winColor = await playGame(posList);
+        var end = new Date().getTime()
+        var cost = (end - startTime)/1000; // seconds
+        console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
+    }
 }
-
-console.log("all finished");
-
 
 function initBoard() {
     return [
