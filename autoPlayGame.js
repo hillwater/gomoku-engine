@@ -160,7 +160,7 @@ async function playGame(initPosList) {
 
         let result = await dataAccess.find(posList, level, type);
 
-        console.log("111")
+        console.log("111:"+result)
         console.log(typeof result);
 
         if(result == null || result == mask) {
