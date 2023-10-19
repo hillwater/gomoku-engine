@@ -160,6 +160,9 @@ async function playGame(initPosList) {
 
         let result = await dataAccess.find(posList, level, type);
 
+        console.log("111")
+        console.log(typeof result);
+
         if(result == null || result == mask) {
             console.log("no hit! start do search, level:"+level+",posList:"+posList+",type:"+type);
             result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
