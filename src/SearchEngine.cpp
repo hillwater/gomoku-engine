@@ -200,6 +200,7 @@ int SearchEngine::SearchMain(int level)
 	if(!IN_BOARD(mvResult))//if no computer move, it means draw or already loose
 	{
 		mvResult = board.getLooseMove(this->curColor);
+		cout<<"loose move: "<<mvResult<<endl;
 	}
 
 #ifdef _DEBUG
