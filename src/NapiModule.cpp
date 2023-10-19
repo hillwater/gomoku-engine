@@ -1,5 +1,6 @@
 #include <napi.h>
 #include <vector>
+#include<iostream>
 #include "../includes/SearchEngine.h"
 
 Napi::Value Search(const Napi::CallbackInfo& info) {
