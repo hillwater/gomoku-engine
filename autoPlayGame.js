@@ -18,35 +18,39 @@ var mask = 0x5a00;
 
 
 var posListArray = [
+    //
+    [COORD_XY(6,6)],
+    [COORD_XY(7,6)],
+    //
     [COORD_XY(7,7),COORD_XY(6,6)],
     [COORD_XY(7,7),COORD_XY(7,6)],
     // 26种开局
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)]
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,5)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,5)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,6)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,6)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,7)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,7)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,8)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,8)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,8)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,9)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,9)],
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,9)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,5)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,6)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,7)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,8)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,9)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,7)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,8)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,9)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(7,8)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(7,9)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(6,8)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(6,9)],
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(5,9)]
 ];
 
 // auto play games
@@ -159,9 +163,6 @@ async function playGame(initPosList) {
         let level = (color===BLACK)?blackLevel:whiteLevel;
 
         let result = await dataAccess.find(posList, level, type);
-
-        console.log("111:"+result)
-        console.log(typeof result);
 
         if(result == null || result == mask) {
             console.log("no hit! start do search, level:"+level+",posList:"+posList+",type:"+type);
