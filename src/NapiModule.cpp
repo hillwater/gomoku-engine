@@ -33,7 +33,7 @@ Napi::Value Search(const Napi::CallbackInfo& info) {
     uint32_t num_locations = arr.Length();
 
     for (unsigned int i = 0; i < num_locations; i++) {
-        int pos = arr.Get(static_cast<napi_value>(Napi::Number::New(info.Env(),i))).As<Napi::Number>();
+        int pos = arr.Get(static_cast<napi_value>(Napi::Number::New(info.Env(),i))).As<Napi::Number>().Int32Value();
         posList.push_back(pos);
     }
 
