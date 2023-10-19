@@ -35,7 +35,7 @@ Napi::Value Search(const Napi::CallbackInfo& info) {
 
     for (unsigned int i = 0; i < num_locations; i++) {
         int pos = arr.Get(static_cast<napi_value>(Napi::Number::New(info.Env(),i))).As<Napi::Number>().Int32Value();
-        std::cout<<""<<pos<<","
+        std::cout<<""<<pos<<",";
         posList.push_back(pos);
     }
 
