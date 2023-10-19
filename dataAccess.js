@@ -37,7 +37,7 @@ exports.find = function(posList, level, type) {
         if(maxLevel == -1){
             return null;
         } else {
-            return pos;
+            return parseInt(pos);
         }
     });
 
