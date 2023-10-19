@@ -1,3 +1,3 @@
 #!/bin/bash
 
-node findWhiteLevel.js > output.log 2>&1 &
+node findWhiteLevel.js > findWhiteLevelOutput.log 2>&1 &
