@@ -30,7 +30,7 @@ function RedisDao() {
 
     this.findMaxLevel = function(posList, minLevel, type) {
         return client.hgetallAsync(utils.posList2Key(posList)).then(function(levelMap) {
-            console.log("redis findMaxLevel,posList:"+posList+",minLevel:"+minLevel+",type:"+type+",levelMap:"+JSON.stringify(levelMap))
+            // console.log("redis findMaxLevel,posList:"+posList+",minLevel:"+minLevel+",type:"+type+",levelMap:"+JSON.stringify(levelMap))
             if(!levelMap) {
                 console.log("redis findMaxLevel,postList:"+posList+" has no data")
                 return null;
@@ -50,7 +50,7 @@ function RedisDao() {
                     pos = levelMap[typeLevel];
                 }
             }
-            console.log("redis findMaxLevel, posList:"+posList+",minLevel:"+minLevel+",type:"+type+" maxLevel:"+maxLevel+",pos:"+pos);
+            // console.log("redis findMaxLevel, posList:"+posList+",minLevel:"+minLevel+",type:"+type+" maxLevel:"+maxLevel+",pos:"+pos);
 
             if(maxLevel == -1 || maxLevel < minLevel) {
                 return null;
