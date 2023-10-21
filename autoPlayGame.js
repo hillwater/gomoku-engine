@@ -19,39 +19,39 @@ var mask = 0x5a00;
 
 var posListArray = [
     //
-    [COORD_XY(6,6)],
-    [COORD_XY(7,6)],
+    // [COORD_XY(6,6)],
+    // [COORD_XY(7,6)],
     
-    [COORD_XY(7,7),COORD_XY(6,6)],
-    [COORD_XY(7,7),COORD_XY(7,6)],
+    // [COORD_XY(7,7),COORD_XY(6,6)],
+    // [COORD_XY(7,7),COORD_XY(7,6)],
     // 26种开局
     [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,8)],//浦月
     [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,7)],//恒星
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,5)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,6)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,8)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,9)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,7)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,9)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(7,8)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(7,9)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(6,8)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(6,9)],
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(5,9)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,5)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,6)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,8)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,9)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,7)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,9)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(7,8)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(7,9)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(6,8)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(6,9)],
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(5,9)],
 
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,5)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,5)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,5)],
     [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,6)],//花月
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,6)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,7)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,7)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,8)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,8)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,8)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,9)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,9)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,9)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,6)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,7)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,7)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,8)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,8)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,8)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,9)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,9)],
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,9)],
 ];
 
 // auto play games
