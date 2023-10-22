@@ -8,7 +8,7 @@ var dataAccess = require('./dataAccess');
 const BLACK=1;
 const WHITE=-1;
 
-var blackLevel = 18;
+var blackLevel = 14;
 var whiteLevel = 18;
 var useMultiCore = false;
 var useMultiMachine = false;
@@ -36,8 +36,8 @@ var posListArray = [
     // [COORD_XY(7,7),COORD_XY(6,6)],
     // [COORD_XY(7,7),COORD_XY(7,6)],
     // 26种开局
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,8)],//浦月
-    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,7)],//恒星
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,8)],//浦月
+    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,7)],//恒星
     // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,5)],
     // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,6)],
     // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,8)],
@@ -53,7 +53,7 @@ var posListArray = [
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(7,5)],
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,5)],
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,5)],
-    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,6)],//花月
+    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,6)],//花月
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,6)],
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,7)],
     // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(9,7)],
