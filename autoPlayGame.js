@@ -16,6 +16,17 @@ var machineCount = 0;
 var type = 0;
 var mask = 0x5a00;
 
+// history failure game
+var failureGameArray = [
+    [119,102,104,134,87,121,71,103,88,86,70,69,120,72,105,122,55,37,90,135,59],
+    [119,102,134,104,133,120,117,101,103,136,152,151,132,131,116,115,148,88,72,164,99,150,69,84],
+    [119,135,136,153,104,120,105,89,106,103,86,152,151,121,118,102,116,117,132,100,149],
+    [119,135,136,153,104,120,105,89,102,103,86,85,70,54,87,121,72,117,71,69,53,36,40,101,133,42,23],
+    [119,103,104,89,86,118,133,134,150,116,72,88,73,71,54,101,84,99,87],
+    [119,134,136,102,152,103,150,151,168],
+    [119,136,134,104,152,151,166,121,150],
+    [119,102,117,118,134,151,149,104,164,179,132,101,100,135,84,148,103,120,152],
+];
 
 var posListArray = [
     //
@@ -61,6 +72,18 @@ runAutoGame().then(() => {
 })
 
 async function runAutoGame() {
+    // add history failure game to initial posListArray
+    for(let i = 0; i< failureGameArray.length;i++) {
+        let posList = failureGameArray[i];
+        console.log("handle failure posList:"+posList);
+
+        for(let j= 5;j<=posList.length;j+=2) {
+            let newPosList = posList.slice(0,j);
+            posListArray.push(newPosList);
+            console.log(newPosList);
+        }
+    }
+
     for(let i = 0; i<posListArray.length;i++) {
         let posList = posListArray[i];
         let startTime = new Date().getTime()
