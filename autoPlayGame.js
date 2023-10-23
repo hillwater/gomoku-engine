@@ -110,7 +110,27 @@ async function runAutoGame() {
         console.log(posList);
     }
 
-    for(let i = 0; i<posListArray.length;i++) {
+
+    // use multiple machine to calculate, each one calculate a part of it.
+    // totalCount,offset(start from 0),limit
+    let totalCount,offset,limit;
+    if(process.argv.length<5) {
+        totalCount = 1;
+        offset = 0;
+        limit = 1;
+    } else {
+        totalCount = parseInt(process.argv[2]);
+        offset = parseInt(process.argv[3]);
+        limit = parseInt(process.argv[4]);
+    }
+
+    let length = posListArray.length;
+    let beginIndex = Math.floor(offset * length/totalCount);
+    let endIndex = Math.floor((offset+limit) * length/totalCount);
+
+    console.log("totalCount:"+totalCount+",offset:"+offset+",limit:"+limit+",arrayLength:"+length+",beginIndex:"+beginIndex+",endIndex:"+endIndex);
+
+    for(let i = beginIndex; i<endIndex;i++) {
         let posList = posListArray[i];
         let startTime = new Date().getTime()
         let winColor = await playGame(posList);
