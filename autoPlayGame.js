@@ -9,7 +9,7 @@ const BLACK=1;
 const WHITE=-1;
 
 var blackLevel = 14;
-var whiteLevel = 18;
+var whiteLevel = 16;
 var useMultiCore = false;
 var useMultiMachine = false;
 var machineCount = 0;
