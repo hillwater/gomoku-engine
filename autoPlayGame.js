@@ -1,6 +1,7 @@
 var addonPath = './build/Release';
 var gomoku = require(addonPath + '/gomoku.node');
 var dataAccess = require('./dataAccess');
+let fs = require('fs');
 
 // 0: empty
 // 1: black
@@ -87,24 +88,13 @@ runAutoGame().then(() => {
 
 async function runAutoGame() {
     // add history loose game to initial posListArray
-    for(let i = 0; i< whiteLooseGameArray.length;i++) {
-        let posList = whiteLooseGameArray[i];
+    addHistoryLooseGame();
 
-        for(let j= 5;j<=posList.length;j+=2) {
-            let newPosList = posList.slice(0,j);
-            posListArray.push(newPosList);
-        }
-    }
-    for(let i = 0; i< blackLooseGameArray.length;i++) {
-        let posList = blackLooseGameArray[i];
+    // read from real play game posList file
+    addHistoryRealPlayGame();
 
-        for(let j= 4;j<=posList.length;j+=2) {
-            let newPosList = posList.slice(0,j);
-            posListArray.push(newPosList);
-        }
-    }
-
-    console.log("all posList array:");
+    // print all
+    console.log("all posList array, size:"+posListArray.length+", array:");
     for(let i = 0; i<posListArray.length;i++) {
         let posList = posListArray[i];
         console.log(posList);
@@ -137,6 +127,40 @@ async function runAutoGame() {
         let end = new Date().getTime()
         let cost = (end - startTime)/1000; // seconds
         console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
+    }
+}
+
+function addHistoryLooseGame() {
+    for(let i = 0; i< whiteLooseGameArray.length;i++) {
+        let posList = whiteLooseGameArray[i];
+
+        for(let j= 5;j<=posList.length;j+=2) {
+            let newPosList = posList.slice(0,j);
+            posListArray.push(newPosList);
+        }
+    }
+    for(let i = 0; i< blackLooseGameArray.length;i++) {
+        let posList = blackLooseGameArray[i];
+
+        for(let j= 4;j<=posList.length;j+=2) {
+            let newPosList = posList.slice(0,j);
+            posListArray.push(newPosList);
+        }
+    }
+}
+
+function addHistoryRealPlayGame() {
+    let fileContent = fs.readFileSync('./realPos.txt','utf8');
+    let array = fileContent.split("\n");
+    console.log("file lines:"+array.length);
+    for(let i = 0; i<array.length;i++) {
+        let str = array[i];
+        let posStrList = str.split(",");
+        let posList = [];
+        for(let j = 0;j<posStrList.length;j++) {
+            posList.push(parseInt(posStrList[j]));
+        }
+        posListArray.push(posList);
     }
 }
 
