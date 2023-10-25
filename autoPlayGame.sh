@@ -1,3 +1,3 @@
 #!/bin/bash
 
-node autoPlayGame.js > autoPlayGameOutput.log 2>&1 &
+node autoPlayGame.js slave > autoPlayGameOutput.log 2>&1 &
