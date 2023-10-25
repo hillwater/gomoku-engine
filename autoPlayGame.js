@@ -1,6 +1,8 @@
 var addonPath = './build/Release';
 var gomoku = require(addonPath + '/gomoku.node');
 var dataAccess = require('./dataAccess');
+var RedisDao = require('./redisConnector');
+var redisDao = new RedisDao();
 let fs = require('fs');
 
 // 0: empty
@@ -16,6 +18,8 @@ var useMultiMachine = false;
 var machineCount = 0;
 var type = 0;
 var mask = 0x5a00;
+var masterSlaveMode=false;
+
 
 // history loose game
 var whiteLooseGameArray = [
@@ -87,46 +91,46 @@ runAutoGame().then(() => {
 })
 
 async function runAutoGame() {
-    // add history loose game to initial posListArray
-    addHistoryLooseGame();
+    parseArgv();
 
-    // read from real play game posList file
-    addHistoryRealPlayGame();
+    if(masterSlaveMode == 'master') {
+        // add history loose game to initial posListArray
+        addHistoryLooseGame();
 
-    // print all
-    console.log("all posList array, size:"+posListArray.length+", array:");
-    for(let i = 0; i<posListArray.length;i++) {
-        let posList = posListArray[i];
-        console.log(posList);
-    }
+        // read from real play game posList file
+        addHistoryRealPlayGame();
 
+        // print all
+        console.log("all posList array, size:"+posListArray.length+", array:");
+        for(let i = 0; i<posListArray.length;i++) {
+            let posList = posListArray[i];
+            console.log(posList);
+        }
 
-    // use multiple machine to calculate, each one calculate a part of it.
-    // totalCount,offset(start from 0),limit
-    let totalCount,offset,limit;
-    if(process.argv.length<5) {
-        totalCount = 1;
-        offset = 0;
-        limit = 1;
+        for(let i = 0; i<posListArray.length;i++) {
+            await redisDao.addToList("autoPlayGame", posListArray[i], blackLevel, whiteLevel, type);
+        }
+    } else if(masterSlaveMode == 'slave') {
+        while(true) {
+            let obj = await redisDao.pull("autoPlayGame");
+            console.log("receive:"+JSON.stringify(obj));
+            let posList = obj.posList;
+            let startTime = new Date().getTime()
+            let winColor = await playGame(posList);
+            let end = new Date().getTime()
+            let cost = (end - startTime)/1000; // seconds
+            console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
+        }
     } else {
-        totalCount = parseInt(process.argv[2]);
-        offset = parseInt(process.argv[3]);
-        limit = parseInt(process.argv[4]);
+        console.log("wrong arguments, it needs: node autoPlayGame.js master|slave");
     }
+}
 
-    let length = posListArray.length;
-    let beginIndex = Math.floor(offset * length/totalCount);
-    let endIndex = Math.floor((offset+limit) * length/totalCount);
-
-    console.log("totalCount:"+totalCount+",offset:"+offset+",limit:"+limit+",arrayLength:"+length+",beginIndex:"+beginIndex+",endIndex:"+endIndex);
-
-    for(let i = beginIndex; i<endIndex;i++) {
-        let posList = posListArray[i];
-        let startTime = new Date().getTime()
-        let winColor = await playGame(posList);
-        let end = new Date().getTime()
-        let cost = (end - startTime)/1000; // seconds
-        console.log("cost for posList:"+posList+",cost:"+cost+"s"+",winColor:"+winColor);
+function parseArgv() {
+    if(process.argv.length<3) {
+        masterSlaveMode = 'none';
+    } else {
+        masterSlaveMode = process.argv[2];
     }
 }
 

@@ -71,6 +71,28 @@ function RedisDao() {
                 return true;
             });
     };
+
+    this.addToList = function(listKey, posList, blackLevel, whiteLevel, type) {
+        let obj = {
+            posList: posList,
+            blackLevel: blackLevel,
+            whiteLevel: whiteLevel,
+            type: type
+        }
+        return client.rpushAsync(listKey, JSON.stringify(obj))
+            .then(function(){
+                console.log("success to add redis list: %s, posList: %s, blackLevel: %s, whiteLevel: %s, type: %s",
+                    listKey, posList, blackLevel, whiteLevel, type);
+                return true;
+            });
+    }
+
+    this.pull = function(listKey) {
+        return client.blpopAsync(listKey, 0).then((data) => {
+            // data[0] is listKey, data[1] is value
+            return JSON.parse(data[1]);
+        });
+    }
 }
 
 module.exports = RedisDao;
