@@ -11,7 +11,7 @@
 // 	const int ERROR_RESULT = 0x100;
 
 // 	HandleScope scope;
-// 	if (args.Length() < 6) {
+// 	if (args.Length() < 3) {
 // 		ThrowException(Exception::TypeError(String::New("Wrong number of arguments: " + args.Length())));
 // 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
 // 	}

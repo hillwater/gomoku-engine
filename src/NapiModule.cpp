@@ -5,7 +5,7 @@
 Napi::Value Search(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
 
-    if (info.Length() < 6) {
+    if (info.Length() < 3) {
         Napi::TypeError::New(env, "Wrong number of arguments" + info.Length()).ThrowAsJavaScriptException();
         return env.Null();
     }
