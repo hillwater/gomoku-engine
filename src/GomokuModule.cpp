@@ -46,45 +46,18 @@
 // 		posList.push_back(value->IntegerValue());
 // 	}
 
-// 	// multiple core speed up flag
-// 	if (!args[2]->IsBoolean()) {
-// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-// 	}
-
-// 	bool useMultiCore = args[2]->BooleanValue();
-
-// 	// multiple machine speed up flag
-// 	if (!args[3]->IsBoolean()) {
-// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-// 	}
-
-// 	bool useMultiMachine = args[3]->BooleanValue();
-
-// 	// how many machines for multiple machine speed up
-// 	if (!args[4]->IsUint32()) {
-// 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
-// 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
-// 	}
-
-// 	uint32_t machineCount = args[4]->Uint32Value();
-
 // 	// type
-// 	if (!args[5]->IsUint32()) {
+// 	if (!args[2]->IsUint32()) {
 // 		ThrowException(Exception::TypeError(String::New("Wrong arguments")));
 // 		return scope.Close(Uint32::NewFromUnsigned(ERROR_RESULT));
 // 	}
 
-// 	uint32_t type = args[5]->Uint32Value();
+// 	uint32_t type = args[2]->Uint32Value();
 
 // 	SearchEngine* searchEngine = SearchEngine::getInstance();
 
 // 	uint32_t result = searchEngine->search(level,
 // 			posList,
-// 			useMultiCore,
-// 			useMultiMachine,
-// 			machineCount,
 // 			type);
 
 // 	return scope.Close(Uint32::NewFromUnsigned(result));

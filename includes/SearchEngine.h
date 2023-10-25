@@ -27,9 +27,6 @@ public:
 	// for nodejs module
 	int32 search(int32 level,
 			vector<int32> posList,
-			bool useMultiCore,
-			bool useMultiMachine,
-			int32 machineCount,
 			int32 type);
 
 	static SearchEngine* getInstance();

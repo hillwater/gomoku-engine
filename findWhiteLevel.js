@@ -8,9 +8,6 @@ const BLACK=1;
 const WHITE=-1;
 
 var blackLevel = 12;
-var useMultiCore = false;
-var useMultiMachine = false;
-var machineCount = 0;
 var type = 0;
 
 for(var whiteLevel = 14; whiteLevel< 30;whiteLevel++) {
@@ -120,7 +117,7 @@ function playGame(whiteLevel) {
     while(true) {
         var level = (color===BLACK)?blackLevel:whiteLevel;
 
-        var result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
+        var result = gomoku.search(level,posList, type);
 
         posList.push(result);
         add(board, color, RANK_X(result), RANK_Y(result));

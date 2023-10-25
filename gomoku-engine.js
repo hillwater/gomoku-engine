@@ -25,18 +25,16 @@ function handleMessage(msg) {
 
   let level = parseInt(msg.level);
   let posList = convertStringArrayToIntArray(msg.posList);
-  let useMultiCore = parseInt(msg.useMultiCore);
-  let useMultiMachine = parseInt(msg.useMultiMachine);
-  let machineCount = parseInt(msg.machineCount);
   let type = parseInt(msg.type);
-  var result = gomoku.search(level, posList, useMultiCore, useMultiMachine, machineCount, type);
+  console.log("start search, posList:"+posList+",level:"+level+",type:"+type);
+  let result = gomoku.search(level, posList, type);
 
   dataAccess.insert(posList, level, type, result);
 }
 
 function convertStringArrayToIntArray(strArray) {
-  var result = [];
-  for(var i = 0; i<strArray.length;i++) {
+  let result = [];
+  for(let i = 0; i<strArray.length;i++) {
     result.push(parseInt(strArray[i]));
   }
   return result;

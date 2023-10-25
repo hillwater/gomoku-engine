@@ -37,41 +37,17 @@ Napi::Value Search(const Napi::CallbackInfo& info) {
         posList.push_back(pos);
     }
 
-    // multiple core speed up flag
-    if (!info[2].IsBoolean()) {
-        Napi::TypeError::New(env, "Wrong useMultiCore arguments").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-
-    bool useMultiCore = info[2].As<Napi::Boolean>().Value();
-
-    // multiple machine speed up flag
-    if (!info[3].IsBoolean()) {
-        Napi::TypeError::New(env, "Wrong useMultiMachine arguments").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-
-    bool useMultiMachine = info[3].As<Napi::Boolean>().Value();
-
-    // how many machines for multiple machine speed up
-    if (!info[4].IsNumber()) {
-        Napi::TypeError::New(env, "Wrong machineCount arguments").ThrowAsJavaScriptException();
-        return env.Null();
-    }
-
-    uint32_t machineCount = info[4].As<Napi::Number>().Int32Value();
-
     // type
-    if (!info[5].IsNumber()) {
+    if (!info[2].IsNumber()) {
         Napi::TypeError::New(env, "Wrong type arguments").ThrowAsJavaScriptException();
         return env.Null();
     }
 
-    uint32_t type = info[5].As<Napi::Number>().Int32Value();
+    uint32_t type = info[2].As<Napi::Number>().Int32Value();
 
     SearchEngine* searchEngine = SearchEngine::getInstance();
 
-    uint32_t result = searchEngine->search(level,posList,useMultiCore,useMultiMachine,machineCount,type);
+    uint32_t result = searchEngine->search(level,posList,type);
 
     return Napi::Number::New(env, result);
 }

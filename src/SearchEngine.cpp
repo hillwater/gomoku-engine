@@ -40,9 +40,6 @@ SearchEngine* SearchEngine::getInstance() {
 
 int32 SearchEngine::search(int32 level,
 			vector<int32> posList,
-			bool useMultiCore,
-			bool useMultiMachine,
-			int32 machineCount,
 			int32 type)
 {
 	cout<<"start to do AI search :"<<endl;
@@ -53,9 +50,6 @@ int32 SearchEngine::search(int32 level,
 		cout<<posList[i]<<",";
 	}
 	cout<<"]"<<endl;
-	cout<<"	Use Multiple Core Speed Up : "<<useMultiCore<<endl;
-	cout<<"	Use Multiple Machine Speed Up : "<<useMultiMachine<<", Machine Count :"<<machineCount<<endl;
-
 
 	if(posList.size() == 0) {
 		int result = COORD_XY(7,7);

@@ -11,9 +11,6 @@ const WHITE=-1;
 
 var blackLevel = 14;
 var whiteLevel = 16;
-var useMultiCore = false;
-var useMultiMachine = false;
-var machineCount = 0;
 var type = 0;
 var mask = 0x5a00;
 var masterSlaveMode=false;
@@ -267,7 +264,7 @@ async function playGame(initPosList) {
 
         if(result == null || result == mask) {
             console.log("no hit! start do search, level:"+level+",posList:"+posList+",type:"+type);
-            result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
+            result = gomoku.search(level, posList, type);
 
             // reach the end
             if(result == 255) {
