@@ -72,17 +72,10 @@ function RedisDao() {
             });
     };
 
-    this.addToList = function(listKey, posList, blackLevel, whiteLevel, type) {
-        let obj = {
-            posList: posList,
-            blackLevel: blackLevel,
-            whiteLevel: whiteLevel,
-            type: type
-        }
+    this.addToList = function(listKey, obj) {
         return client.rpushAsync(listKey, JSON.stringify(obj))
             .then(function(){
-                console.log("success to add redis list: %s, posList: %s, blackLevel: %s, whiteLevel: %s, type: %s",
-                    listKey, posList, blackLevel, whiteLevel, type);
+                console.log("success to add redis list: %s, value: %s",listKey, JSON.stringify(obj));
                 return true;
             });
     }

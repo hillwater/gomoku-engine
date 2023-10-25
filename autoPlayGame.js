@@ -1,8 +1,6 @@
 var addonPath = './build/Release';
 var gomoku = require(addonPath + '/gomoku.node');
-var dataAccess = require('./dataAccess');
-var RedisDao = require('./redisConnector');
-var redisDao = new RedisDao();
+var dataAccess = require('./Dao/dataAccess');
 let fs = require('fs');
 
 // 0: empty
@@ -108,11 +106,16 @@ async function runAutoGame() {
         }
 
         for(let i = 0; i<posListArray.length;i++) {
-            await redisDao.addToList("autoPlayGame", posListArray[i], blackLevel, whiteLevel, type);
+            await dataAccess.addToList("autoPlayGame", {
+                posList: posListArray[i], 
+                blackLevel:blackLevel, 
+                whiteLevel:whiteLevel, 
+                type:type
+            });
         }
     } else if(masterSlaveMode == 'slave') {
         while(true) {
-            let obj = await redisDao.pull("autoPlayGame");
+            let obj = await dataAccess.pull("autoPlayGame");
             console.log("receive:"+JSON.stringify(obj));
             let posList = obj.posList;
             let startTime = new Date().getTime()
