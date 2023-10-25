@@ -1,9 +1,9 @@
 #!/bin/bash
 
-IMAGE=hillwater/gomoku-engine:2.0.0
+IMAGE=hillwater/gomoku-engine:3.0.0
 
-CLOUDAMQP_URL=amqp://hillwater:hillwater@172.17.0.1:5672/gomoku
+REDIS_HOST=172.17.0.1
 
 docker login
 
-docker run -e "CLOUDAMQP_URL=$CLOUDAMQP_URL" -d $IMAGE
+docker run -e "REDIS_HOST=$REDIS_HOST" -d $IMAGE

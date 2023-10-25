@@ -6,7 +6,6 @@
     "start": "node gomoku-engine.js"
   },
   "dependencies": {
-    "amqplib": "0.8.x",
     "bluebird": "3.7.x",
     "node-addon-api": "^7.0.0",
     "node-uuid": "1.4.x",

@@ -17,18 +17,16 @@ you can have a play on http://www.hillwater.xyz/gomoku
 
 
 ````
-export CLOUDAMQP_URL=amqp://localhost
-
-./run.sh
+docker run -e "REDIS_HOST=localhost" -d hillwater/gomoku-engine:3.0.0
 ````
 
 ## what's inside
 it's a node js service.
-consume message from AMQP, such as rabbitmq.
+consume message from redis list queue,
 the message is a gomoku board state.
 this service use an C++ addon module to calculate the target smart position.
-send the result to AMQP.
+write the result to redis.
 this service only do calcuation, so it's stateless.
 
-The front side, should handle the UI request, and send gomoku board state to AMQP, and receive messages.
+The front side, should handle the UI request, and send gomoku board state to redis list.
 the JS side every 1 second to poll the caculation result.
