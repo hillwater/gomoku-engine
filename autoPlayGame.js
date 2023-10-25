@@ -265,6 +265,12 @@ async function playGame(initPosList) {
         if(result == null || result == mask) {
             console.log("no hit! start do search, level:"+level+",posList:"+posList+",type:"+type);
             result = gomoku.search(level,posList, useMultiCore, useMultiMachine, machineCount, type);
+
+            // reach the end
+            if(result == 255) {
+                return color;
+            }
+
             // insert to redis
             await dataAccess.insert(posList, level, type, result);
             console.log("finish do search, level:"+level+",posList:"+posList+",type:"+type+",result:"+result);
