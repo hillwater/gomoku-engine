@@ -4,10 +4,10 @@ RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/build/Release
 WORKDIR /usr/src/app
 
-COPY ./Dao /usr/src/app/
-COPY package.json /usr/src/app/
-COPY gomoku-engine.js /usr/src/app/
-COPY build/Release/gomoku.node /usr/src/app/build/Release/
+COPY Dao ./Dao
+COPY package.json ./
+COPY gomoku-engine.js ./
+COPY build/Release/gomoku.node ./build/Release/
 RUN npm install
 
 CMD [ "node", "gomoku-engine.js" ]
