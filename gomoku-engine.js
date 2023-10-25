@@ -23,12 +23,12 @@ function handleMessage(msg) {
     return;
   }
 
-  let level = parseInt(data.level);
-  let posList = convertStringArrayToIntArray(data.posList);
-  let useMultiCore = parseInt(data.useMultiCore);
-  let useMultiMachine = parseInt(data.useMultiMachine);
-  let machineCount = parseInt(data.machineCount);
-  let type = parseInt(data.type);
+  let level = parseInt(msg.level);
+  let posList = convertStringArrayToIntArray(msg.posList);
+  let useMultiCore = parseInt(msg.useMultiCore);
+  let useMultiMachine = parseInt(msg.useMultiMachine);
+  let machineCount = parseInt(msg.machineCount);
+  let type = parseInt(msg.type);
   var result = gomoku.search(level, posList, useMultiCore, useMultiMachine, machineCount, type);
 
   dataAccess.insert(posList, level, type, result);
