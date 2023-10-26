@@ -1,6 +1,5 @@
-var addonPath = './build/Release';
-var gomoku = require(addonPath + '/gomoku.node');
-var dataAccess = require('./Dao/dataAccess');
+var gomoku = require('../build/Release/gomoku.node');
+var dataAccess = require('../Dao/dataAccess');
 let fs = require('fs');
 
 // 0: empty

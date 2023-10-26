@@ -1,7 +1,4 @@
-//var addonPath = './build/Release';
-var addonPath = './build/Debug';
-
-var gomoku = require(addonPath + '/gomoku.node');
+var gomoku = require( '../build/Debug/gomoku.node');
 
 var level = 12;
 var posList = [119, 103, 136, 102, 104, 134, 120, 152, 118];
