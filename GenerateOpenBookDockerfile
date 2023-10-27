@@ -4,10 +4,10 @@ RUN mkdir -p /usr/src/app
 RUN mkdir -p /usr/src/app/build/Release
 WORKDIR /usr/src/app
 
-COPY ../../Dao ./Dao
-COPY ../../package.json ./
+COPY Dao ./Dao
+COPY package.json ./
 COPY generateOpenBook.js ./
-COPY ../../build/Release/gomoku.node ./build/Release/
+COPY build/Release/gomoku.node ./build/Release/
 RUN npm install
 
-CMD [ "node", "generateOpenBook.js", "slave"]
+CMD [ "node", "generateOpenBook.js", "slave" ]
