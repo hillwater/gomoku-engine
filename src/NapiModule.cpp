@@ -52,8 +52,40 @@ Napi::Value Search(const Napi::CallbackInfo& info) {
     return Napi::Number::New(env, result);
 }
 
+Napi::Value GenerateMoves(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+
+    uint32_t expandLevel = info[0].As<Napi::Number>().Int32Value();
+
+    // position list
+    Napi::Array arr = info[1].As<Napi::Array>();
+    std::vector<uint32_t> posList;
+    uint32_t num_locations = arr.Length();
+    for (uint32_t i = 0; i < num_locations; i++) {
+        int pos = arr.Get(static_cast<napi_value>(Napi::Number::New(info.Env(),i))).As<Napi::Number>().Int32Value();
+        posList.push_back(pos);
+    }
+
+    uint32_t type = info[2].As<Napi::Number>().Int32Value();
+    
+    uint32_t branchFactor = info[3].As<Napi::Number>().Int32Value();
+
+    SearchEngine* searchEngine = SearchEngine::getInstance();
+
+    std::vector<uint32_t> nextMoves;
+    searchEngine->generateMovesForOpenBook(expandLevel, posList,type,branchFactor, nextMoves);
+
+    Napi::Array result = Napi::Array::New(env);
+    for (uint32_t i = 0; i < nextMoves.size(); i++) {
+        result.Set(Napi::Number::New(env,i),Napi::Number::New(env,nextMoves[i]));
+    }
+
+    return result;
+}
+
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
     exports.Set(Napi::String::New(env, "search"), Napi::Function::New(env, Search));
+    exports.Set(Napi::String::New(env, "generateMoves"), Napi::Function::New(env, GenerateMoves));
     return exports;
 }
 

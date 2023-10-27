@@ -28,6 +28,12 @@ public:
 	int32 search(int32 level,
 			vector<int32> posList,
 			int32 type);
+	
+	void generateMovesForOpenBook(int32 level,
+			vector<int32> posList,
+			int32 type,
+			int32 branchFactor,
+			vector<int32>& nextMoves);
 
 	static SearchEngine* getInstance();
 

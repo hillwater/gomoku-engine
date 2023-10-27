@@ -72,6 +72,79 @@ int32 SearchEngine::search(int32 level,
 	return result;
 }
 
+void SearchEngine::generateMovesForOpenBook(int32 level,vector<int32> posList,int32 type,int32 branchFactor, vector<int32>& nextMoves)
+{
+	cout<<"start to do generateMoves :"<<endl;
+	cout<<"	Level : "<<level<<endl;
+	cout<<"	Type : "<<type<<endl;
+	cout<<"	Position List Count("<<posList.size()<<") [";
+	for(int i = 0;i< posList.size();i++) {
+		cout<<posList[i]<<",";
+	}
+	cout<<"]"<<endl;
+
+	if(posList.size() == 0) {
+		return;
+	}
+
+	initial();
+
+	for(int i = 0;i< posList.size();i++) {
+		addPiece(posList[i]);
+	}
+
+	if(board.hasFive()) {
+		return;
+	}
+
+	int32 mvResult = NO_MOVE;
+	struct timeb startTime , endTime;
+	ftime(&startTime);
+
+	nDistance = 0;
+	memset(mvKillers,NO_MOVE,sizeof(mvKillers));
+	memset(nHistoryTable, 0, MAX_MOVES*sizeof(int)); // clear history table
+	transposition.initial();
+
+	totalSearchNode = 0;
+
+	// depth deep search + expected window search
+	int alpha = -MATE_VALUE;
+	int beta = MATE_VALUE;
+	const int expectedWindow = 41;
+	const int MAX_LEVEL = level;
+	for (int i = 1; i <=MAX_LEVEL; i ++) {//LIMIT_DEPTH
+		int value = SearchFull(alpha, beta, i);
+
+		cout<<"level="<<i<<",value="<<value<<"\n";
+
+		// if win or loose, stop expand nodes
+		if (value > WIN_VALUE || value < -WIN_VALUE) {
+			return;
+		}
+	}
+
+	// generate moves and sort by value
+	int8 move = NO_MOVE;
+	bool isNeedExtend = false;
+	int8 mvHash = NO_MOVE;
+	NextMove m_next(&board,nHistoryTable,this->curColor,mvHash,mvKillers[nDistance][0],mvKillers[nDistance][1]);
+	while((move = m_next.next(isNeedExtend)) != NO_MOVE && branchFactor > 0) {
+		nextMoves.push_back(move);
+		branchFactor--;
+	}
+
+	ftime(&endTime);
+
+	long time = (endTime.time-startTime.time)*1000 + (endTime.millitm - startTime.millitm);
+
+	cout<<"Time:"<<time<<"ms\n";
+
+	cout<<"finish to do generateMoves, result size:"<<nextMoves.size()<<endl;
+
+	cout.flush();
+}
+
 void SearchEngine::initial()
 {
 	board.clearBoard();
