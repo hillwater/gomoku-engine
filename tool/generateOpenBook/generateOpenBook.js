@@ -1,5 +1,5 @@
-var gomoku = require('../build/Release/gomoku.node');
-var dataAccess = require('../Dao/dataAccess');
+var gomoku = require('../../build/Release/gomoku.node');
+var dataAccess = require('../../Dao/dataAccess');
 
 // 0: empty
 // 1: black
@@ -12,8 +12,8 @@ var masterSlaveMode=false;
 
 var posListArray = [
     [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(8,8)],//浦月
-    // [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,7)],//恒星
-    // [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,6)],//花月
+    [COORD_XY(7,7),COORD_XY(8,6),COORD_XY(9,7)],//恒星
+    [COORD_XY(7,7),COORD_XY(7,6),COORD_XY(8,6)],//花月
 ];
 
 generateOpenBook().then(() => {
@@ -29,8 +29,8 @@ async function generateOpenBook() {
         let whiteLevel = 14;
         let expandLevel = 12;
         let type = 0;
-        let deep = 3;
-        let branchFactor = 2;
+        let deep = 10;
+        let branchFactor = 3;
 
         for(let i = 0; i<posListArray.length;i++) {
             await dataAccess.addToList("generateOpenBook", {
