@@ -2,7 +2,7 @@
 
 IMAGE=hillwater/gomoku-generate-openbook:1.0.0
 
-REDIS_HOST=172.17.0.1
+REDIS_HOST=172.18.250.131
 
 docker login
 
