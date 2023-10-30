@@ -1,4 +1,4 @@
-var gomoku = require('../build/Release/gomoku.node');
+var gomoku = require('../../build/Release/gomoku.node');
 
 // 0: empty
 // 1: black
