@@ -55,7 +55,7 @@ async function generateOpenBook() {
 
     if(masterSlaveMode == 'master') {
         let blackLevel = 14;
-        let whiteLevel = 16;
+        let whiteLevel = 18;
         let type = 0;
 
         await dataAccess.scanAllKey(async function(key, value) {
