@@ -43,6 +43,16 @@ exports.posList2Key = function (posList) {
     }
 };
 
+exports.key2PosList = function(data) {
+    var array = [];
+
+    for(var i = 0;i<data.length;i++) {
+        var pos = data.charCodeAt(i);
+        array.push(pos);
+    }
+    return array;
+};
+
 exports.combineTypeLevel = function(type, level) {
     return ''+type+':'+level;
 };

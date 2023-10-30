@@ -72,6 +72,26 @@ function RedisDao() {
             });
     };
 
+    this.hgetallAsync = async function(key) {
+        let levelMap = null;
+                
+        try {
+            levelMap = await client.hgetallAsync(key);
+        } catch(err) {
+            // not a hash key
+        }
+
+        return levelMap;
+    }
+
+    this.hdel = function(key, levelType) {
+        return client.hdel(key, levelType);
+    }
+
+    this.scan = async function(cursor, pattern, limit) {
+        return client.scanAsync(cursor, 'MATCH', pattern, 'COUNT', limit);
+    }
+
     this.addToList = function(listKey, obj) {
         return client.rpushAsync(listKey, JSON.stringify(obj))
             .then(function(){

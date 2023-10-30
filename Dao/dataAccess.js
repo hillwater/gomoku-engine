@@ -218,3 +218,44 @@ exports.addToList = function(listKey, obj) {
 exports.pull = function(listKey) {
     return redisDao.pull(listKey);
 }
+
+exports.scanAllKey = async function(callback) {
+    let cursor = 0;
+    let pattern = "*";
+    let limit = 1000;
+    let totalCount = 0;
+
+    console.log("start to scan all");
+
+    do {
+        let result = await redisDao.scan(cursor, pattern, limit);
+        cursor = result[0];
+        let data = result[1];
+        for(let i = 0;i<data.length;i++) {
+            let key = data[i];
+
+            // check whether a hash key
+            let value = await redisDao.hgetallAsync(key);
+            if(value == null) {
+                continue;
+            }
+
+            totalCount++;
+            await callback(key, value);
+        }
+    } while(cursor != 0)
+
+    console.log("finished scan all, size:"+totalCount);
+}
+
+exports.clearAllMask = async function() {
+    await this.scanAllKey(function(key, levelMap) {
+        for(let levelType in levelMap) {
+            if(levelMap[levelType] == mask) {
+                // need to clear
+                redisDao.hdel(key, levelType);
+                console.log("clear mask, posList:"+utils.key2PosList(key)+",levelType:"+levelType+",levelMap:"+JSON.stringify(levelMap));
+            }
+        }
+    });
+}
