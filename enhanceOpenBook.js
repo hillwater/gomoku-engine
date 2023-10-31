@@ -57,12 +57,13 @@ async function generateOpenBook() {
         let blackLevel = 14;
         let whiteLevel = 18;
         let type = 0;
+        let totalCount = 0;
 
         await dataAccess.scanAllKey(async function(key, value) {
             let posList = utils.key2PosList(key);
 
             // skip black calculation
-            if(posList.length<3 || posList.length % 2 == 0) {
+            if(posList.length<3) {
                 return;
             }
 
@@ -82,9 +83,12 @@ async function generateOpenBook() {
                         blackLevel: blackLevel,
                         whiteLevel: whiteLevel
                     });
+                    totalCount++;
                 }
             }
         });
+
+        console.log("totalCount:"+totalCount);
     } else if(masterSlaveMode == 'slave') {
         while(true) {
             let msg = await dataAccess.pull("enhanceOpenBook");
