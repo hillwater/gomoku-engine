@@ -54,7 +54,7 @@ async function generateOpenBook() {
     parseArgv();
 
     if(masterSlaveMode == 'master') {
-        let blackLevel = 14;
+        let blackLevel = 18;
         let whiteLevel = 18;
         let type = 0;
         let totalCount = 0;
